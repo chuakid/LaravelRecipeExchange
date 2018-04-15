@@ -37,16 +37,12 @@ class RecipeController extends Controller
          $id = Recipe::create($request->all());
          $this->updateSteps($steps, $id);
     }
-
-
-
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function show($id) {
       if(Recipe::find($id)->exists()) {
         return response()->json(Recipe::find($id),200);
