@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Step extends Model
 {
     //
-    $fillable = ['']
+  protected  $fillable = ['description','recipeId','position'];
 }

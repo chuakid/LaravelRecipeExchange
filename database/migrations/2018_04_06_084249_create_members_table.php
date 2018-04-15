@@ -17,8 +17,9 @@ class CreateMembersTable extends Migration
             $table->increments('id');
             $table->string('username');
             $table->string('password');
-            $table->integer('roleId');
+            $table->integer('roleId')->default(1);
             $table->string('displayName');
+            $table->string('token')->default('');
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ class CreateRecipesTable extends Migration
             $table->string('name');
             $table->integer('submitter');
             $table->string('description');
-            $table->string('status');
+            $table->enum('status',['available','notAvailable'])->default('available');
             $table->integer('timeneeded');
             $table->integer('preptime');
             $table->integer('servings');

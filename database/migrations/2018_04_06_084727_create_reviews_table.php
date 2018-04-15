@@ -18,6 +18,7 @@ class CreateReviewsTable extends Migration
             $table->integer('stars');
             $table->string('review');
             $table->integer('recipe');
+            $table->string('submitter');
             $table->timestamps();
         });
     }
