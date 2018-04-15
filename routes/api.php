@@ -19,12 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Routes that require logging in
 Route::middleware('AuthToken')->group(function () {
   //Recipe Functions
   Route::post('/recipe/edit/{id}','RecipeController@update');
   Route::post('/recipe/add','RecipeController@store');
   Route::post('/recipe/edit/{id}','RecipeController@update');
-  Route::get('/recipe/{id}','RecipeController@show');
   Route::post('/recipe/delete/{id}','RecipeController@destroy');
 
   //Review Functions
@@ -38,6 +38,9 @@ Route::middleware('AuthToken')->group(function () {
   Route::post('/favourite/remove/{recipeId}','FavouriteController@destroy');
 
 });
+
+//All Accessible Routes
 Route::post('/login','AccountController@login');
 Route::post('/register','AccountController@register');
 Route::get('/recipe/{id}','RecipeController@show');
+Route::get('/recipe/getAll','RecipeController@getRecipes');

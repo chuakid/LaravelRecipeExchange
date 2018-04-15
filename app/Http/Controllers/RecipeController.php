@@ -7,6 +7,8 @@ use App\Member;
 use App\Recipe;
 use App\Category;
 use App\Step;
+use App\Favourite;
+use DB;
 
 class RecipeController extends Controller
 {
@@ -17,9 +19,21 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
+    public function getRecipes(){
+      return response()->json(
+        Recipe::join('reviews','recipes.id','=','reviews.recipe')
+        ->leftjoin('members','members.id','=','recipes.submitter')
+        ->leftjoin('favourites','favourites.recipe','=','recipes.id')
+        ->groupBy('recipes.id','recipes.name','recipes.submitter')
+        ->select('recipes.id','recipes.name','recipes.submitter',
+        DB::raw( 'AVG(reviews.stars) as stars'),DB::raw('COUNT(favourites.recipe) as favourites'))
+        ->limit(10)
+        ->get()
+      ,200);
+    }
     /**
      * Store a newly created resource in storage.
      *
